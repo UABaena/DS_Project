@@ -5,7 +5,7 @@ public class MainApplication {
         /*Mostrar reloj hora actual cada 2 segundos*/
 
 
-        System.out.println("Hello world!");
+        System.out.println("Hello!");
     }
 
 }
