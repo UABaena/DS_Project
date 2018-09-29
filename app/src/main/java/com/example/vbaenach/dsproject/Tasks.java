@@ -1,4 +1,4 @@
 package com.example.vbaenach.dsproject;
 
-public class Tasks{
+public class Tasks extends Activity{
 }

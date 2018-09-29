@@ -8,7 +8,6 @@ public class Clock extends Observable{
 
     /*Private classes*/
     private abstract class ClockTimer extends TimerTask {
-    /*eeee*/
     }
     /*Attributes*/
     private ClockTimer clockTimer;
