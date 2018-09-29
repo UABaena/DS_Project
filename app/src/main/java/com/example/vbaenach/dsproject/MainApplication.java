@@ -6,6 +6,18 @@ public class MainApplication {
 
 
         System.out.println("Hello funciona!");
+
+
+        Interval observador = new Interval();
+        Clock clock= new Clock();
+        clock.addObserver(observador);
+        clock.tick();
+
+
+
+
+
+        }
     }
 
 }
