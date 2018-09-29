@@ -1,4 +1,8 @@
 package com.example.vbaenach.dsproject;
 
-public class ActivityList {
+import java.util.ArrayList;
+
+public class ActivityList extends ArrayList {
+    /*Attributes*/
+    private ArrayList a_list;
 }
