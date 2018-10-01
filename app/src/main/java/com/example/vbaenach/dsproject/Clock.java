@@ -5,40 +5,52 @@ import java.util.Date;
 
 
 
-public class Clock extends Observable{
+
+
+public class Clock extends Observable {
+
+    /*Atrributes*/
+    /*ClockTimer clockTimer = new ClockTimer(1000);
     /*Methods*/
 
-    void Clock ()
-    {
-    }
+    public Clock() {};
+
     public void tick() {
-        Date date = new Date();
-        setChanged();
-        notifyObservers(date);
-        System.out.println("Se ha notificado a los observadores");
+
+            Date date = new Date();
+            setChanged();
+            System.out.println(date);
+            notifyObservers(date);
+            System.out.println("Se ha notificado a los observadores");
+
     }
 
+    public void s(){
+        ClockTimer timertask = new ClockTimer(this);
+        timertask.run();
 
-    ClockTimer clockTimer= new ClockTimer(1000);
+    }
 
     /*Private classes*/
-    private  class ClockTimer extends TimerTask {
+    private class ClockTimer extends TimerTask {
         /*Attributes*/
-        private long scheduleinms;
 
+        Clock clock;
         /*Methods*/
-        protected ClockTimer(long schedule){
-          this.scheduleinms=schedule;
-        };
-
-        public long scheduledExecutionTime()
-        {
-         return scheduleinms ;
+        protected ClockTimer(Clock c) {
+            this.clock = c;
         }
-
+        ;
         public void run() {
-            if (System.currentTimeMillis() - scheduledExecutionTime() >=0) {
-            System.out.println("cambia de schedule");
+            while (true){
+                clock.tick();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
 
             }
 
@@ -47,4 +59,4 @@ public class Clock extends Observable{
     }
 
 
-}
+
