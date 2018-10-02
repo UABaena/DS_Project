@@ -2,6 +2,7 @@ package com.example.vbaenach.dsproject ;
 import java.util.Observable;
 import java.util.TimerTask;
 import java.util.Date;
+import java.util.Timer;
 
 
 
@@ -12,8 +13,15 @@ public class Clock extends Observable {
     /*Atrributes*/
     /*ClockTimer clockTimer = new ClockTimer(1000);
     /*Methods*/
+    ClockTimer timertask = new ClockTimer(this);
+    public Clock() {
 
-    public Clock() {};
+
+            Timer timer = new Timer();
+            timer.scheduleAtFixedRate(timertask, 0, 1000);
+
+
+    };
 
     public void tick() {
 
@@ -25,9 +33,10 @@ public class Clock extends Observable {
 
     }
 
-    public void s(){
-        ClockTimer timertask = new ClockTimer(this);
+    public void start(){
+
         timertask.run();
+
 
     }
 
@@ -42,15 +51,8 @@ public class Clock extends Observable {
         }
         ;
         public void run() {
-            while (true){
-                clock.tick();
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
 
+                clock.tick();
 
             }
 
