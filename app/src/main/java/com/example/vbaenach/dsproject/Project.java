@@ -18,7 +18,11 @@ public class Project extends Activity {
     public Date getP_totalTimeProject(){        return p_totalTimeProject;    }
 
     public ArrayList<Activity> getP_activityList() {return p_activityList;}
+    public Activity getActByName (String act){
+        return p_activityList.get(p_activityList.indexOf(act));
+    }
     /*Attributes*/
     private ArrayList<Activity> p_activityList;
     private Date p_totalTimeProject;
+
 }
