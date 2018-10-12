@@ -1,4 +1,12 @@
 package com.example.vbaenach.dsproject ;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 public class MainApplication {
     public static Project creaArbreTest(){
         Project proj1 = new Project("P1", "D1");
@@ -12,13 +20,45 @@ public class MainApplication {
         proj1.getP_activityList().add(proj2);
         return proj1;
     }
+    public static void saveProject(Project proj,String path){
+        try {
+            FileOutputStream arxiu = new FileOutputStream(path);
+            ObjectOutputStream sortida = new ObjectOutputStream(arxiu);
+            sortida.writeObject(proj);
+            sortida.close();
+            arxiu.close();
+            System.out.println("Objecte desat correctament");
+        } catch (IOException e) {
+            System.out.println("Error: "+e);
+        }
+    }
+    public static Project loadProject(String path){
+        Project proj = new Project("ProjectNotFound","Unable to load project");
+        try {
+            FileInputStream arxiu = new FileInputStream(path);
+            ObjectInputStream in = new ObjectInputStream(arxiu);
+            proj = (Project)in.readObject();
+            in.close();
+            arxiu.close();
+            return proj;
+        } catch (IOException e) {
+            System.out.println("Error: "+e);
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error: "+e);
+        }
+        finally {
+            return proj;
+        }
+    }
 
     public static int test(){
+        /*Path to load and save our project*/
+        String path = "./FILE_BACKUP.ser";
         int errors = 0;
         //1. Iniciar la aplicaci´o i crear l’estructura de projectes i tasques anterior
         //2. Indicar que el temps es comptar`a cada dos segons i per tant que la sortida de la aplicaci´o
         //s’actualitzar`a o mostrar`a tamb´e amb aquesta periodicitat.
-        Project proj2segons = creaArbreTest();
+        //Project proj2segons = creaArbreTest();
         int timeDelay = 2;
 
         //3. Comen¸car a cronometrar la tasca T3. A partir d’aquest moment s’ha de s’ha de mostrar
@@ -27,14 +67,14 @@ public class MainApplication {
         //poder llegir-ne el contingut. No cal sobreescriure la taula si no voleu, simplement anar-la
         //reimprimint.
 
-        Clock clock= new Clock(timeDelay);
+        /*Clock clock= new Clock(timeDelay);
         clock.start();
-        //clock.addObserver(AQUI VA UNA TTASCA O PROJ CON SU INTERVAL INICIADO);
 
-        /*
         Interval interval = new Interval(clock);
-        clock.addObserver(interval);
-        */
+        clock.addObserver(interval);*/
+        //saveProject(proj2segons,path);
+        Project projectLoaded = loadProject(path);
+        System.out.println(projectLoaded.getName());
 
 
 

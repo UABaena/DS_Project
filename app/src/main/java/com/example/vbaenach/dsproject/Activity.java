@@ -1,5 +1,8 @@
 package com.example.vbaenach.dsproject;
-public abstract class Activity {
+
+import java.io.Serializable;
+
+public abstract class Activity implements Serializable {
     /*Constructors*/
 
     public Activity(String a_name) {

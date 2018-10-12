@@ -1,4 +1,5 @@
 package com.example.vbaenach.dsproject;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 public class Project extends Activity {
