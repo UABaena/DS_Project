@@ -2,49 +2,38 @@ package com.example.vbaenach.dsproject ;
 import java.util.Observable;
 import java.util.TimerTask;
 import java.util.Date;
-
-
-
-public class Clock extends Observable{
+import java.util.Timer;
+public class Clock extends Observable {
+    /*Atrributes*/
+    /*ClockTimer clockTimer = new ClockTimer(1000);
     /*Methods*/
-
-    void Clock ()
-    {
-    }
+    ClockTimer timertask = new ClockTimer(this);
+    public Clock(int timeDelay) {
+            Timer timer = new Timer();
+            timer.scheduleAtFixedRate(timertask, 0, 1000*timeDelay);
+    };
     public void tick() {
-        Date date = new Date();
-        setChanged();
-        notifyObservers(date);
-        System.out.println("Se ha notificado a los observadores");
+            Date date = new Date();
+            setChanged();
+            //System.out.println(date);
+            notifyObservers(date);
+            //System.out.println("Se ha notificado a los observadores");
     }
-
-
-    ClockTimer clockTimer= new ClockTimer(1000);
-
+    public void start(){
+        timertask.run();
+    }
     /*Private classes*/
-    private  class ClockTimer extends TimerTask {
+    private class ClockTimer extends TimerTask {
         /*Attributes*/
-        private long scheduleinms;
-
+        Clock clock;
         /*Methods*/
-        protected ClockTimer(long schedule){
-          this.scheduleinms=schedule;
-        };
 
-        public long scheduledExecutionTime()
-        {
-         return scheduleinms ;
+        protected ClockTimer(Clock c) {
+            this.clock = c;
         }
 
         public void run() {
-            if (System.currentTimeMillis() - scheduledExecutionTime() >=0) {
-            System.out.println("cambia de schedule");
-
-            }
-
+            clock.tick();
         }
-
     }
-
-
 }

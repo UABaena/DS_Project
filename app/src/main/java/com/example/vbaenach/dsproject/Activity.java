@@ -1,5 +1,8 @@
 package com.example.vbaenach.dsproject;
-public class Activity{
+
+import java.io.Serializable;
+
+public abstract class Activity implements Serializable {
     /*Constructors*/
 
     public Activity(String a_name) {
@@ -10,10 +13,11 @@ public class Activity{
         this.a_name = a_name;
         this.a_desc = a_desc;
     }
+
     public String getName(){return a_name;}
     public String getDesc(){return a_desc;}
     /*Methods*/
-    /*Attributes*/
+            /*Attributes*/
     private String a_name;
     private String a_desc;
 }
